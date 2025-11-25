@@ -19,6 +19,7 @@ public interface ProductService {
 
  List<ProductDto> upsertAll(List<ProductDto> productDtos);
 
+ void updateStocks(List<ProductDto> productDto);
 
 
 }
