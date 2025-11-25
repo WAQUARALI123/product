@@ -168,4 +168,24 @@ public class ProductServiceImpl implements ProductService {
         return dto;
     }
 
+    @Override
+    @Transactional
+    public void updateStocks(List<ProductDto> productDto) {
+
+        for (ProductDto dto : productDto) {
+
+            Product product = productRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException("Product not found with id "+ dto.getId()));
+
+            if(dto.getStock()<0){
+
+                throw new RuntimeException("Stock connot be nagative for product :"+ dto.getStock());
+            }
+
+            product.setStock(dto.getStock());
+            productRepository.save(product);
+
+        }
+
+    }
+
 }
